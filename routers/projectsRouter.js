@@ -24,6 +24,16 @@ router.get('/:id', validateID('project'), async (req, res)=>{
 
     }
 })
+router.get('/:id/actions', validateID('project'), async (req, res)=>{
+    try{
+        res.json(await db.getProjectActions(req.params.id))
+
+    } catch(err) {
+        console.log(err)
+        res.status(500).json('There was an internal server error')
+
+    }
+})
 
 
 router.post('/', async (req, res) =>{

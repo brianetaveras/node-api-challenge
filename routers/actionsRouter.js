@@ -32,5 +32,16 @@ router.post('/:projectID/', validateID('action'), async (req, res)=>{
     }
 })
 
+router.put('/:projectID/:id', validateID('action'),  async (req, res)=>{
+    res.json(await db.update(req.params.id, {
+        project_id: req.params.projectID,
+        description: req.body.description,
+        notes: req.body.notes,
+        completed: req.body.completed
+    }))
+})
+router.delete('/:projectID/:id', validateID('action'),  async (req, res)=>{
+    res.json(await db.remove(req.params.id))
+})
 
 module.exports = router;

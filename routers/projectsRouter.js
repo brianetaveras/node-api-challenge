@@ -13,6 +13,19 @@ router.get('/', async (req, res)=>{
     };
 });
 
+
+router.get('/:id', validateID('project'), async (req, res)=>{
+    try{
+        res.json(req.project)
+
+    } catch(err) {
+        console.log(err)
+        res.status(500).json('There was an internal server error')
+
+    }
+})
+
+
 router.post('/', async (req, res) =>{
     try{
         if (req.body.name && req.body.description){
@@ -30,6 +43,19 @@ router.post('/', async (req, res) =>{
     }
 })
 
+
+router.put('/:id', validateID('project'), async (req, res)=>{
+    try {
+        res.json(await db.update(req.params.id, {
+            name: req.body.name,
+            description: req.body.description,
+            completed: req.body.completed
+        }))
+    } catch(err){
+        console.log(err.message);
+        res.status(500).json({message: "There was an internal server error"})
+    }
+})
 
 
 

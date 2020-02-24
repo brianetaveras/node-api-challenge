@@ -5,9 +5,11 @@ server.use(express.json())
 
 // Routers
 const projectRouter = require("./routers/projectsRouter");
+const actionsRouter = require("./routers/actionsRouter");
 
 
 server.use('/api/projects', projectRouter);
+server.use('/api/actions', actionsRouter);
 
 
 server.get('/', async (req, res)=>{

@@ -57,6 +57,15 @@ router.put('/:id', validateID('project'), async (req, res)=>{
     }
 })
 
+router.delete('/:id', validateID('project'), async (req, res)=>{
+    try{
+        res.json(await db.remove(req.params.id))
+    } catch(err){
+        console.log(err.message)
+        res.status(500).json({message: "There was an internal server error"})
+    }
+})
+
 
 
 module.exports = router;
